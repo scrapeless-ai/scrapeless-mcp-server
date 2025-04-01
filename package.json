@@ -1,0 +1,43 @@
+{
+  "name": "scrapeless-mcp-server",
+  "version": "0.1.2",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "scrapeless-mcp-server": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod 755 build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "keywords": [
+    "scrapeless",
+    "mcp",
+    "google",
+    "google search",
+    "serpapi",
+    "cursor",
+    "claude",
+    "ai",
+    "model-context-protocol"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "Scrapeless Mcp Server",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "zod": "^3.24.2",
+    "axios": "^1.8.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "typescript": "^5.8.2"
+  },
+  "homepage": "https://scrapeless.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scrapeless-ai/scrapeless-mcp-server"
+  }
+}
