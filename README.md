@@ -1,10 +1,10 @@
-<div align="center">
-  <img src="https://avatars.githubusercontent.com/u/189844671" width="120" height="120" alt="Scrapeless Logo" />
-</div>
+![preview](./banner.png)
 
 # Scrapeless Mcp Server
 
-A Model Context Protocol (MCP) server implementation for Scrapeless, providing advanced search capabilities.
+Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. MCP provides a standardized way to connect LLM with the required context, helping you efficiently enhance chat interfaces, build AI-driven IDEs, or create custom AI workflows.
+
+Seamlessly integrate real-time Google SERP(Google Search, Google Flight, Google Map, Google Jobs....) results into your LLM applications using the Scrapeless MCP server. This server acts as a bridge between LLMs (like ChatGPT, Claude, etc.) and Scrapeless's Google SERP, enabling dynamic context retrieval for AI workflows, chatbots, and research tools.
 
 ## Overview
 
