@@ -1,0 +1,56 @@
+name: scrapeless
+
+params:
+  type: object
+  properties:
+    SCRAPELESS_KEY:
+      type: string
+      description: SCRAPELESS API KEY
+  required:
+    - SCRAPELESS_KEY
+
+rest:
+  port: 9593
+  endpoint: /rest
+
+npx:
+  command:
+    | SCRAPELESS_KEY={SCRAPELESS_KEY} npx -y scrapeless-mcp-server
+  config:
+    | {
+        "mcpServers": {
+          "scrapelessMcpServer": {
+            "command": "npx",
+            "args": [
+              "-y",
+              "scrapeless-mcp-server"
+            ],
+            "env": {
+              "SCRAPELESS_KEY": "YOUR_SCRAPELESS_KEY"
+            }
+          }
+        }
+      }
+
+docker:
+  command:
+    | docker run -i --rm -e SCRAPELESS_KEY={SCRAPELESS_KEY} mcp/scrapeless
+  config:
+    | {
+        "mcpServers": {
+          "scrapelessMcpServer": {
+            "command": "docker",
+            "args": [
+              "run",
+              "-i",
+              "--rm",
+              "-e",
+              "SCRAPELESS_KEY",
+              "mcp/scrapeless"
+            ],
+            "env": {
+              "SCRAPELESS_KEY": "YOUR_SCRAPELESS_KEY"
+            }
+          }
+        }
+      }

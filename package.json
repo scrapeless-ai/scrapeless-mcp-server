@@ -1,6 +1,6 @@
 {
   "name": "scrapeless-mcp-server",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -27,9 +27,10 @@
   "license": "ISC",
   "description": "Scrapeless Mcp Server",
   "dependencies": {
+    "@chatmcp/sdk": "^1.0.5",
     "@modelcontextprotocol/sdk": "^1.8.0",
-    "zod": "^3.24.2",
-    "axios": "^1.8.4"
+    "axios": "^1.8.4",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/node": "^22.13.14",
