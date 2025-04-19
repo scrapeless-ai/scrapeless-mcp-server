@@ -135,3 +135,46 @@ server.tool(
     };
   }
 );
+
+server.tool(
+  "google-jobs-search",
+  "Search for job listings using Google Jobs",
+  {
+    query: z
+      .string()
+      .describe(
+        "Parameter defines the query you want to search the jobs for. You can use job titles and location (e.g., 'software engineer', 'python developer in san francisco')."
+      ),
+    gl: z
+      .string()
+      .optional()
+      .describe(
+        "Parameter defines the country to use for the Google search. It's a two-letter country code. (e.g., us for the United States, uk for United Kingdom, or fr for France)."
+      ),
+    hl: z
+      .string()
+      .optional()
+      .describe(
+        "Parameter defines the language to use for the Google search. It's a two-letter language code. (e.g., en for English, es for Spanish, or fr for French)."
+      ),
+  },
+  async ({ query, gl = "us", hl = "en" }) => {
+    const response = await scrapelessClient.sendRequest(
+      TOOL_ENDPOINTS.SCRAPER,
+      "scraper.google.jobs",
+      {
+        q: query,
+        engine: "google_jobs",
+        gl,
+        hl,
+      }
+    );
+
+    return {
+      content: response.content.map((item) => ({
+        type: "text",
+        text: item.text,
+      })),
+    };
+  }
+);
