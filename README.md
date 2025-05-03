@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/scrapeless-ai-scrapeless-mcp-server-badge.png)](https://mseep.ai/app/scrapeless-ai-scrapeless-mcp-server)
+
 ![preview](./banner.png)
 
 # Scrapeless Mcp Server
