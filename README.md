@@ -42,7 +42,7 @@ This project provides several MCP servers that enable AI assistants like Claude 
 ```json
 {
   "mcpServers": {
-    "scrapelessMcpServer": {
+    "ScrapelessMcpServer": {
       "command": "npx",
       "args": ["-y", "scrapeless-mcp-server"],
       "env": {
