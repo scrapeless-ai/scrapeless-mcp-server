@@ -18,6 +18,11 @@ This project provides several MCP servers that enable AI assistants like Claude 
 
 - Google Search
 
+## Supported Transport Protocols
+
+- **Stdio** `default`: The transport runs locally on your machine and communicates via standard input/output streams.
+- **Streamable HTTP** `--mode=streamable_http`: The new MCP transport protocol that simplifies client-server communication through a single HTTP endpoint
+
 ## Tools
 
 ### 1. Search Tool
@@ -39,10 +44,11 @@ This project provides several MCP servers that enable AI assistants like Claude 
 
 ### 2. Configure
 
+#### use Stdio
 ```json
 {
   "mcpServers": {
-    "ScrapelessMcpServer": {
+    "scrapelessMcpServer": {
       "command": "npx",
       "args": ["-y", "scrapeless-mcp-server"],
       "env": {
@@ -53,6 +59,26 @@ This project provides several MCP servers that enable AI assistants like Claude 
 }
 ```
 
+#### use streamable http
+  
+1. Run locally
+``` shell
+npx scrapeless-mcp-server --mode=streamable_http --SCRAPELESS_KEY=YOUR_SCRAPELESS_KEY
+```
+
+2. Add mcp configuration
+```json
+{
+  "mcpServers": {
+    "scrapelessMcpServer": {
+      "type": "streamable-http",
+      "url": "http://127.0.0.1:9593/mcp",
+      "disabled": false
+      
+    },
+  }
+}
+```
 
 ## Example Queries
 
