@@ -3,7 +3,10 @@ import z from "zod";
 
 export const scrapeMarkdown = defineTool({
   name: 'scrape_markdown',
-  description: 'Scrape Markdown content from a URL using Universal Scraping API',
+  description: `Scrape a URL and return its content as Markdown.
+    Restrictions: Best for articles, blog posts, and other text-heavy pages.
+    Valid: Scrape a news article to get its readable content.
+    Invalid: Scrape a complex web application dashboard.`,
   inputSchema: {
     url: z.string().url().describe('target URL'),
   },
@@ -20,5 +23,3 @@ export const scrapeMarkdown = defineTool({
     );
   }
 })
-
-

@@ -3,7 +3,7 @@ import z from "zod";
 
 export const googleSearch = defineTool({
   name: 'google-search',
-  description: 'Fetch Google Search Results',
+  description: 'Universal Information Search Engine.Retrieves any data information; Explanatory queries (why, how).Comparative analysis requests',
   inputSchema: {
     q: z
       .string()
@@ -300,5 +300,3 @@ export const googleSearch = defineTool({
     );
   }
 })
-
-

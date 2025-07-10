@@ -3,7 +3,10 @@ import z from "zod";
 
 export const googleScholar = defineTool({
   name: 'google_scholar',
-  description: 'Search Google Scholar for academic articles',
+  description: `Search for academic papers on Google Scholar.
+    Restrictions: Activated only for academic or scientific research queries.
+    Valid: Find papers by "Yoshua Bengio" on deep learning.
+    Invalid: Search for news articles about "Yoshua Bengio" (use google_search).`,
   inputSchema: {
     q: z
       .string()
@@ -86,5 +89,3 @@ export const googleScholar = defineTool({
     );
   }
 })
-
-

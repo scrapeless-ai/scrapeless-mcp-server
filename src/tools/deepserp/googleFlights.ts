@@ -3,7 +3,10 @@ import z from "zod";
 
 export const googleFlights = defineTool({
   name: 'google_flights',
-  description: 'Search for flights using Google Flights via Scrapeless API',
+  description: `Exclusive Flight Information Query Tool.
+    Activated only when requests include departure city, arrival city, and specific date/date range.
+    Valid:Check flights from Beijing to Shanghai on July 15.
+    Invalid:Compare airline service quality (use google-search instead)`,
   inputSchema: {
     gl: z
       .string()
@@ -104,11 +107,7 @@ export const googleFlights = defineTool({
       .describe('An airport code is an uppercase 3-letter code. You can search for it on Google Flights or IATA.')
       .default('BCN'),
     data_type: z
-      .union([
-        z.literal(1).describe('Round trip'),
-        z.literal(2).describe('One way'),
-        z.literal(3).describe('Multi-city')
-      ])
+      .number()
       .describe(
         'Parameter defines the type of the flights.\nAvailable options:\n1 - Round trip (default)\n2 - One way\n3 - Multi-city\n\nWhen this parameter is set to 3, use multi_city_json to set the flight information.\n\nTo obtain the returning flight information for Round Trip (1), you need to make another request using a departure_token.'
       )
@@ -212,5 +211,3 @@ export const googleFlights = defineTool({
     );
   }
 })
-
-

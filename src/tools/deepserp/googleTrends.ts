@@ -3,7 +3,10 @@ import z from "zod";
 
 export const googleTrends = defineTool({
   name: 'google_trends',
-  description: 'Fetch Google Trends data',
+  description: `Get trending search data from Google Trends.
+    Restrictions: Activated for queries about trends, popularity, or interest over time.
+    Valid: Find the search interest for "AI" over the last year.
+    Invalid: A general question like "What is AI?" (use google_search).`,
   inputSchema: {
     q: z
       .string()
@@ -216,5 +219,3 @@ export const googleTrends = defineTool({
     );
   }
 })
-
-
