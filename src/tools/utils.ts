@@ -106,8 +106,11 @@ export function wrapMcpBrowserResponse(content: string): CallToolResult {
 }
 
 export function uuid() {
-  const nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 8);
-  return nanoid();
+  const nanoid1 = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 4);
+  const nanoid2 = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 4);
+  const nanoid3 = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 4);
+  const nanoid4 = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 6);
+  return `${nanoid1()}-${nanoid2()}-${nanoid3()}-${nanoid4()}`;
 }
 
 export async function snapshot(page: Page) {

@@ -11,20 +11,21 @@ import type { BrowserSession } from "./session-manager.js";
 export class Context {
   private sessionManager: SessionManager;
   private currentSessionId: string = "default-session-id";
-  constructor() {
+  private apiKey: string | undefined;
+  constructor(apiKey?: string) {
     this.sessionManager = new SessionManager();
+    this.apiKey = apiKey;
   }
 
   public getSession(id?: string) {
-    return this.sessionManager.getSession(id ?? this.currentSessionId);
+    return this.sessionManager.getSession(`${id ?? this.currentSessionId}-${this.apiKey}`);
   }
 
   async run(
     tool: BrowserTool,
     params: any,
-    apiKey: string
   ): Promise<CallToolResult> {
-    if (!apiKey) {
+    if (!this.apiKey) {
       return {
         content: [
           {
@@ -41,9 +42,9 @@ export class Context {
 
     const toolName = tool.name;
     if (toolName === "browser_create") {
-      const newSessionId = uuid() + "-" + apiKey;
+      const newSessionId = uuid();
       try {
-        await this.sessionManager.createSession(newSessionId, apiKey);
+        await this.sessionManager.createSession(`${newSessionId}-${this.apiKey}`, this.apiKey);
         return {
           content: [
             {
@@ -77,7 +78,7 @@ export class Context {
         };
       }
       try {
-        await this.sessionManager.closeSession(sessionId);
+        await this.sessionManager.closeSession(`${sessionId}-${this.apiKey}`);
         return {
           content: [
             {
@@ -99,10 +100,10 @@ export class Context {
     }
 
     let session: BrowserSession | null = null;
-    session = this.sessionManager.getSession(this.currentSessionId);
+    session = this.sessionManager.getSession(`${this.currentSessionId}-${this.apiKey}`);
     if (!session) {
-      const newSessionId = uuid() + "-" + apiKey;
-      await this.sessionManager.createSession(newSessionId, apiKey);
+      const newSessionId = uuid();
+      await this.sessionManager.createSession(`${newSessionId}-${this.apiKey}`, this.apiKey);
       this.currentSessionId = newSessionId;
     }
 

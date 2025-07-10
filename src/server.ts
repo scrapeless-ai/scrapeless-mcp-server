@@ -36,7 +36,7 @@ export const createMcpServer = (apiKey?: string) => {
     );
   })
 
-  const context = new Context();
+  const context = new Context(apiKey ?? API_KEY);
 
   Object.values(browserTools).forEach((tool) => {
     server.tool(
@@ -44,7 +44,7 @@ export const createMcpServer = (apiKey?: string) => {
       tool.description,
       tool.inputSchema,
       async (params: any) => {
-        const result = await context.run(tool, params, apiKey ?? API_KEY);
+        const result = await context.run(tool, params);
         return result;
       }
     );
