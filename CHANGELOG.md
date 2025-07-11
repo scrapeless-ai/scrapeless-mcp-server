@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/scrapeless-ai/scrapeless-mcp-server/compare/v0.4.0...v0.4.1) (2025-07-11)
+
+
+### Bug Fixes
+
+* rename to google_search ([6d8c4d5](https://github.com/scrapeless-ai/scrapeless-mcp-server/commit/6d8c4d5a0ba65c469ddfe1a327217dd8ad71ec4a))
+
 ## 0.4.0 (2025-07-11)
 
 
