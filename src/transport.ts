@@ -6,6 +6,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { createMcpServer, ServerList } from "./server.js";
+import { API_KEY_NAME } from "./config.js";
 
 export async function startStdioTransport() {
   const serverList = new ServerList(async () => createMcpServer());
@@ -129,7 +130,6 @@ function createRemoteServerList(
   req: http.IncomingMessage,
   res: http.ServerResponse
 ) {
-  const API_KEY_NAME = "x-api-token";
   const apiKey = req.headers[API_KEY_NAME] as string | undefined;
   if (!apiKey) {
     res.statusCode = 401;

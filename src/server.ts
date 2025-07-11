@@ -6,7 +6,7 @@ import * as toolsList from './tools/index.js';
 import * as browserTools from './tools/browser/browser.js';
 import { Context } from './context.js';
 
-const serverOptions = {
+export const serverOptions = {
   name: "scrapeless-mcp-server",
   version: "0.2.0",
   capabilities: { resources: {}, tools: {} },
@@ -14,7 +14,11 @@ const serverOptions = {
 
 export const createMcpServer = (apiKey?: string) => {
   const server = new McpServer(serverOptions);
+  initMcpTools(server, apiKey)
+  return server.server
+};
 
+export const initMcpTools = (server: McpServer, apiKey?: string) => {
   const getScrapelessClient = () => {
     if (apiKey) {
       return new ScrapelessClient({
@@ -49,9 +53,7 @@ export const createMcpServer = (apiKey?: string) => {
       }
     );
   });
-
-  return server.server
-};
+}
 
 export class ServerList {
   private _servers: Server[] = [];
