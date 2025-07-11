@@ -1,6 +1,6 @@
 ![preview](./banner.png)
 
-# Scrapeless Mcp Server
+# Scrapeless MCP Server
 
 Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. MCP provides a standardized way to connect LLM with the required context, helping you efficiently enhance chat interfaces, build AI-driven IDEs, or create custom AI workflows.
 
@@ -74,7 +74,7 @@ This project provides several MCP servers that enable AI assistants like Claude 
 - `scrape_screenshot`
   Capture a high-quality screenshot of any webpage.
 
-### Deepserp Tools
+### Deep SerpAPI Tools
 
 - `google_search`
   universal information search engine.retrieves any data information.explanatory queries (why, how).comparative analysis requests.
@@ -102,7 +102,7 @@ This project provides several MCP servers that enable AI assistants like Claude 
 ```json
 {
   "mcpServers": {
-    "ScrapelessMcpServer": {
+    "Scrapeless MCP Server": {
       "command": "npx",
       "args": ["-y", "scrapeless-mcp-server"],
       "env": {
@@ -126,7 +126,7 @@ npx scrapeless-mcp-server --mode=streamable_http --SCRAPELESS_KEY=YOUR_SCRAPELES
 ```json
 {
   "mcpServers": {
-    "ScrapelessMcpServer": {
+    "Scrapeless MCP Server": {
       "type": "streamable-http",
       "url": "http://127.0.0.1:9593/mcp",
       "disabled": false
@@ -139,11 +139,37 @@ npx scrapeless-mcp-server --mode=streamable_http --SCRAPELESS_KEY=YOUR_SCRAPELES
 
 Here are some examples of how to use these servers with Claude Desktop:
 
-### Google Search
+### browser
 
-```
-Please search for "climate change solutions" and summarize the top results.
-```
+Use a browser to visit chatgpt.com, search for "What's the weather like today?", and summarize the results.
+
+### scrape_html
+
+Scrape the html content of scrapeless.com page
+
+### scrape_markdown
+
+Scrape the markdown content of scrapeless.com page
+
+### scrape_screenshot
+
+Get screenshots of scrapeless.com
+
+### google_flights
+
+Please help me with my flight ticket from Chicago to New York on November 20, 2025
+
+### google_scholar
+
+Find papers by "Yoshua Bengio" on deep learning
+
+### google_search
+
+Search scrapeless by google search
+
+### google_trends
+
+Find the search interest for "AI" over the last year
 
 ## Installation
 
