@@ -48,7 +48,7 @@ This project provides several MCP servers that enable AI assistants like Claude 
 ```json
 {
   "mcpServers": {
-    "scrapelessMcpServer": {
+    "ScrapelessMcpServer": {
       "command": "npx",
       "args": ["-y", "scrapeless-mcp-server"],
       "env": {
@@ -70,7 +70,7 @@ npx scrapeless-mcp-server --mode=streamable_http --SCRAPELESS_KEY=YOUR_SCRAPELES
 ```json
 {
   "mcpServers": {
-    "scrapelessMcpServer": {
+    "ScrapelessMcpServer": {
       "type": "streamable-http",
       "url": "http://127.0.0.1:9593/mcp",
       "disabled": false
