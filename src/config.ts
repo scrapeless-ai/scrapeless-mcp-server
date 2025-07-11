@@ -1,27 +1,17 @@
 import { getParamValue } from "@chatmcp/sdk/utils/index.js";
+import { ScrapelessConfig } from "@scrapeless-ai/sdk";
 
-export interface ScrapelessConfig {
-  baseURL: string;
-  token: string;
-}
+export const API_KEY =
+process.env.SCRAPELESS_KEY?.trim() || getParamValue("SCRAPELESS_KEY");
+export const BASE_URL =
+process.env.SCRAPELESS_BASE_URL?.trim() || "https://api.scrapeless.com";
+export const API_KEY_NAME = "x-api-token";
 
-const API_KEY =
-  process.env.SCRAPELESS_KEY?.trim() || getParamValue("SCRAPELESS_KEY");
-const BASE_URL =
-  process.env.SCRAPELESS_BASE_URL?.trim() || "https://api.scrapeless.com";
 export const ServerMode = getParamValue("mode") || "stdio";
-export const ServerPort = getParamValue("port") || 9593;
-export const ServerEndpoint = getParamValue("endpoint") || "/rest";
-
-if (!API_KEY) {
-  throw new Error("❌ Missing environment variable: SCRAPELESS_KEY");
-}
-
-export const TOOL_ENDPOINTS = {
-  SCRAPER: "/api/v1/scraper/request",
-};
+export const ServerPort = getParamValue("port");
+export const ServerHostname = getParamValue("hostname") || "0.0.0.0";
 
 export const SCRAPELESS_CONFIG: ScrapelessConfig = {
-  baseURL: BASE_URL,
-  token: API_KEY,
+  baseApiUrl: BASE_URL,
+  apiKey: API_KEY,
 };

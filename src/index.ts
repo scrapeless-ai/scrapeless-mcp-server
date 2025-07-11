@@ -1,22 +1,19 @@
 #!/usr/bin/env node
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { server } from "./server.js";
-import { RestServerTransport } from "@chatmcp/sdk/server/rest.js";
-import { ServerMode, ServerPort, ServerEndpoint } from "./config.js";
+import { ServerPort, API_KEY, ServerHostname } from "./config.js";
+import { startHttpTransport, startStdioTransport } from "./transport.js";
+
+process.env.SCRAPELESS_IS_ONLINE = "true";
 
 async function main() {
   try {
-    if (ServerMode === "rest") {
-      const transport = new RestServerTransport({
-        port: ServerPort,
-        endpoint: ServerEndpoint,
-      });
-      await server.connect(transport);
-
-      await transport.startServer();
+    if (ServerPort) {
+      // See use the /see endpoint
+      // Streamable HTTP use the /mcp endpoint
+      startHttpTransport(Number(ServerPort), ServerHostname);
     } else {
-      const transport = new StdioServerTransport();
-      await server.connect(transport);
+      if (!API_KEY)
+        throw new Error("❌ Missing environment variable: SCRAPELESS_KEY");
+      startStdioTransport();
     }
   } catch (error) {
     console.error("Fatal error in main():", error);
