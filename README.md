@@ -6,7 +6,8 @@ Model Context Protocol (MCP) is an open protocol that enables seamless integrati
 
 Seamlessly integrate real-time Google SERP(Google Search, Google Flight, Google Map, Google Jobs....) results into your LLM applications using the Scrapeless MCP server. This server acts as a bridge between LLMs (like ChatGPT, Claude, etc.) and Scrapeless's Google SERP, enabling dynamic context retrieval for AI workflows, chatbots, and research tools.
 
-👉 Live MCP Endpoint: 
+👉 Live MCP Endpoint:
+
 - [mcp.so](https://mcp.so/server/scrapelessMcpServer/scrapeless-ai)
 - [glama.ai](https://glama.ai/mcp/servers/@scrapeless-ai/scrapeless-mcp-server)
 
@@ -25,26 +26,79 @@ This project provides several MCP servers that enable AI assistants like Claude 
 
 ## Tools
 
-### 1. Search Tool
-- Name: `google-search`
-- Description: Search the web using Scrapeless
-- Parameters:
-    * `query` (required): Parameter defines the query you want to search. You can use anything that you would use in a regular Google search. e.g. inurl:, site:, intitle:.
-    * `gl` (optional, default: "us"): Parameter defines the country to use for the Google search. It's a two-letter country code. (e.g., us for the United States, uk for United Kingdom, or fr for France).
-    * `hl` (optional, default: "en"): Parameter defines the language to use for the Google search. It's a two-letter language code. (e.g., en for English, es for Spanish, or fr for French).
+### Browser Tools
 
+- `browser_goto`
+  Navigate browser to a specified URL.
+
+- `browser_go_back`
+  Go back one step in browser history.
+
+- `browser_go_forward`
+  Go forward one step in browser history.
+
+- `browser_click`
+  Click a specific element on the page.
+
+- `browser_type`
+  Type text into a specified input field.
+
+- `browser_wait_for`
+  Wait for a specific page element to appear.
+
+- `browser_wait`
+  Pause execution for a fixed duration.
+
+- `browser_screenshot`
+  Capture a screenshot of the current page.
+
+- `browser_get_html`
+  Get the full HTML of the current page.
+
+- `browser_get_text`
+  Get all visible text from the current page.
+
+- `browser_scroll`
+  Scroll to the bottom of the page.
+
+- `browser_scroll_to`
+  Scroll a specific element into view.
+
+### Universal Tools
+
+- `scrape_html`
+  Scrape a URL and return its full HTML content.
+- `scrape_markdown`
+  Scrape a URL and return its content as Markdown.
+
+- `scrape_screenshot`
+  Capture a high-quality screenshot of any webpage.
+
+### Deepserp Tools
+
+- `google_search`
+  universal information search engine.retrieves any data information.explanatory queries (why, how).comparative analysis requests.
+- `google_scholar`
+  Search for academic papers on Google Scholar.
+
+- `google_flights`
+  Exclusive flight information query tool.
+
+- `google_trends`
+  Get trending search data from Google Trends.
 
 ## Setup Guide
 
 ### 1. Get Scrapeless Key
+
 1. Register at [Scrapeless](https://app.scrapeless.com/passport/register?utm_source=github&utm_medium=mcp)
 2. [Get your free trial](https://app.scrapeless.com/landing/guide?utm_source=github&utm_medium=mcp)
 3. [Generate API Key](https://app.scrapeless.com/dashboard/settings/api-key?utm_source=github&utm_medium=mcp)
 
-
 ### 2. Configure
 
-#### use Stdio
+#### Stdio
+
 ```json
 {
   "mcpServers": {
@@ -59,14 +113,16 @@ This project provides several MCP servers that enable AI assistants like Claude 
 }
 ```
 
-#### use streamable http
-  
+#### Streamable
+
 1. Run locally
-``` shell
+
+```shell
 npx scrapeless-mcp-server --mode=streamable_http --SCRAPELESS_KEY=YOUR_SCRAPELESS_KEY
 ```
 
 2. Add mcp configuration
+
 ```json
 {
   "mcpServers": {
@@ -74,8 +130,7 @@ npx scrapeless-mcp-server --mode=streamable_http --SCRAPELESS_KEY=YOUR_SCRAPELES
       "type": "streamable-http",
       "url": "http://127.0.0.1:9593/mcp",
       "disabled": false
-      
-    },
+    }
   }
 }
 ```
@@ -85,10 +140,10 @@ npx scrapeless-mcp-server --mode=streamable_http --SCRAPELESS_KEY=YOUR_SCRAPELES
 Here are some examples of how to use these servers with Claude Desktop:
 
 ### Google Search
+
 ```
 Please search for "climate change solutions" and summarize the top results.
 ```
-
 
 ## Installation
 
@@ -100,22 +155,24 @@ Please search for "climate change solutions" and summarize the top results.
 ### Install from Source
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/scrapeless-ai/scrapeless-mcp-server.git
 cd scrapeless-mcp-server
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
-
 3. Build the server:
+
 ```bash
 npm run build
 ```
 
-
 ## Community
+
 - [MCP Server Discord](https://backend.scrapeless.com/app/api/v1/public/links/discord)
