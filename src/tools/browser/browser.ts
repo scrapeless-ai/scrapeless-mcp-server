@@ -541,3 +541,47 @@ export const browserScrollTo = defineTool<z.ZodRawShape, BrowserTool>({
     }
   },
 });
+
+export const browserPressKey = defineTool<z.ZodRawShape, BrowserTool>({
+  name: "browser_press_key",
+  description: `Simulate a key press.
+    Restrictions: Must specify a valid key name; optional target selector.
+    Valid: Press Enter in #search.
+    Invalid: Press a key without specifying the key name.`,
+  inputSchema: {
+    selector: z.string().describe("The CSS selector of the element to focus.").optional(),
+    key: z.string().describe('Name of the key to press or a character to generate, such as `ArrowLeft` or `a`'),
+  },
+  handle: async (context: Context, params) => {
+    const session = context.getSession(params.sessionId);
+    if (!session?.page) {
+      return wrapMcpBrowserResponse(
+        "No active browser session found. Please create a browser session first."
+      );
+    }
+
+    try {
+      if (params.selector) {
+        await session.page.focus(params.selector);
+      }
+      await session.page.keyboard.press(params.key);
+      const accessibilitySnapshot = await snapshot(session.page);
+      return {
+        content: [
+          {
+            type: "text",
+            text: params.selector ? `Focus on the ${params.selector} and press ${params.key}` : `press ${params.key}`,
+          },
+          {
+            type: "text",
+            text: accessibilitySnapshot,
+          },
+        ],
+      };
+    } catch (error) {
+      return wrapMcpBrowserResponse(
+        `Failed to press key: ${(error as Error).message}`
+      );
+    }
+  },
+});

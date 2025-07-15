@@ -64,6 +64,9 @@ This project provides several MCP servers that enable AI assistants like Claude 
 - `browser_scroll_to`
   Scroll a specific element into view.
 
+- `browser_press_key`
+  Simulate a key press.
+
 ### Universal Tools
 
 - `scrape_html`
