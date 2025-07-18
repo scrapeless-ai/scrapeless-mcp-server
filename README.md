@@ -1,108 +1,72 @@
-![preview](./banner.png)
+![preview](/assets/banner.png)
 
 # Scrapeless MCP Server
 
-Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. MCP provides a standardized way to connect LLM with the required context, helping you efficiently enhance chat interfaces, build AI-driven IDEs, or create custom AI workflows.
+**Welcome to the official Scrapeless Model Context Protocol (MCP) Server** — a powerful integration layer that empowers LLMs, AI Agents, and AI applications to interact with the web in real time.
 
-Seamlessly integrate real-time Google SERP(Google Search, Google Flight, Google Map, Google Jobs....) results into your LLM applications using the Scrapeless MCP server. This server acts as a bridge between LLMs (like ChatGPT, Claude, etc.) and Scrapeless's Google SERP, enabling dynamic context retrieval for AI workflows, chatbots, and research tools.
+Built on the open MCP standard, Scrapeless MCP Server seamlessly connects models like **ChatGPT**, **Claude**, and tools like **Cursor** and **Windsurf** to a wide range of external capabilities, including:
 
-👉 Live MCP Endpoint:
+- **Google services integration** (Search, Flights, Trends, Scholar, etc.)
+- **Browser automation** for page-level navigation and interaction
+- **Scrape** dynamic, JS-heavy sites—export as HTML, Markdown, or screenshots
 
-- [mcp.so](https://mcp.so/server/scrapelessMcpServer/scrapeless-ai)
-- [glama.ai](https://glama.ai/mcp/servers/@scrapeless-ai/scrapeless-mcp-server)
+Whether you're building an AI research assistant, a coding copilot, or autonomous web agents, this server provides the dynamic context and real-world data your workflows need—**without getting blocked**.
 
-📦 NPM Package: [scrapeless-mcp-server](https://www.npmjs.com/package/scrapeless-mcp-server)
+## Usage Examples
 
-## Overview
+1. Automated Web Interaction and Data Extraction with Claude
 
-This project provides several MCP servers that enable AI assistants like Claude to perform various search operations and retrieve data from:
+Using Scrapeless MCP Browser, Claude can perform complex tasks such as web navigation, clicking, scrolling, and scraping through conversational commands, with real-time preview of web interaction results via `live sessions`.
 
-- Google Search
+![preview](/assets/mcp-1.gif)
 
-## Supported Transport Protocols
+2. Bypassing Cloudflare to Retrieve Target Page Content
 
-- **Stdio** `default`: The transport runs locally on your machine and communicates via standard input/output streams.
-- **Streamable HTTP** `--mode=streamable_http`: The new MCP transport protocol that simplifies client-server communication through a single HTTP endpoint
+Using the Scrapeless MCP Browser service, the Cloudflare page is automatically accessed, and after the process is completed, the page content is extracted and returned in Markdown format.
 
-## Tools
+![preview](/assets/mcp-2.gif)
 
-### Browser Tools
+3. Extracting Dynamically Rendered Page Content and Writing to File
 
-- `browser_goto`
-  Navigate browser to a specified URL.
+Using the Scrapeless MCP Universal API, the JavaScript-rendered content of the target page above is scraped, exported in Markdown format, and finally written to a local file named **`text.md`**.
 
-- `browser_go_back`
-  Go back one step in browser history.
+![preview](/assets/mcp-3.gif)
 
-- `browser_go_forward`
-  Go forward one step in browser history.
+4. Automated SERP Scraping
 
-- `browser_click`
-  Click a specific element on the page.
+Using the Scrapeless MCP Server, query the keyword “web scraping” on Google Search, retrieve the first 10 search results (including title, link, and summary), and write the content to the file named `serp.text`.
 
-- `browser_type`
-  Type text into a specified input field.
+![preview](/assets/mcp-4.gif)
 
-- `browser_wait_for`
-  Wait for a specific page element to appear.
+Here are some additional examples of how to use these servers:
 
-- `browser_wait`
-  Pause execution for a fixed duration.
-
-- `browser_screenshot`
-  Capture a screenshot of the current page.
-
-- `browser_get_html`
-  Get the full HTML of the current page.
-
-- `browser_get_text`
-  Get all visible text from the current page.
-
-- `browser_scroll`
-  Scroll to the bottom of the page.
-
-- `browser_scroll_to`
-  Scroll a specific element into view.
-
-- `browser_press_key`
-  Simulate a key press.
-
-### Universal Tools
-
-- `scrape_html`
-  Scrape a URL and return its full HTML content.
-- `scrape_markdown`
-  Scrape a URL and return its content as Markdown.
-
-- `scrape_screenshot`
-  Capture a high-quality screenshot of any webpage.
-
-### Deep SerpAPI Tools
-
-- `google_search`
-  universal information search engine.retrieves any data information.explanatory queries (why, how).comparative analysis requests.
-- `google_scholar`
-  Search for academic papers on Google Scholar.
-
-- `google_flights`
-  Exclusive flight information query tool.
-
-- `google_trends`
-  Get trending search data from Google Trends.
+| Example                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------- |
+| Please help me with my flight ticket from Chicago to New York on November 20, 2025.                                               |
+| Find papers by "Yoshua Bengio" on deep learning.                                                                                  |
+| Search scrapeless by Google search.                                                                                               |
+| Find the search interest for "AI" over the last year.                                                                             |
+| Use a browser to visit [chatgpt.com](http://chatgpt.com), search for "What's the weather like today?", and summarize the results. |
+| Scrape the HTML content of [scrapeless.com](http://scrapeless.com) page.                                                          |
+| Scrape the Markdown content of [scrapeless.com](http://scrapeless.com) page.                                                      |
+| Get screenshots of [scrapeless.com](http://scrapeless.com).                                                                       |
 
 ## Setup Guide
 
-### 1. Get Scrapeless Key
+1. Get Scrapeless Key
 
-1. Register at [Scrapeless](https://app.scrapeless.com/passport/register?utm_source=github&utm_medium=mcp)
-2. [Get your free trial](https://app.scrapeless.com/landing/guide?utm_source=github&utm_medium=mcp)
-3. [Generate API Key](https://app.scrapeless.com/dashboard/settings/api-key?utm_source=github&utm_medium=mcp)
+- [Log in](https://app.scrapeless.com/passport/login?utm_source=github&utm_medium=github-mcp&utm_campaign=mcp) to the Scrapeless Dashboard（Free trial available）
+- Then click "**Setting**" on the left -> select "**API Key Management**" -> click "**Create API Key**". Finally, click the API Key you created to **copy** it.
 
-### 2. Configure
+![preview](/assets/get-apikey.png)
 
-#### Stdio
+2. Configure Your MCP Client
 
-```json
+Scrapeless MCP Server supports both **Stdio** and **Streamable HTTP** transport modes.
+
+🖥️ Stdio (Local Execution)
+
+```JSON
 {
   "mcpServers": {
     "Scrapeless MCP Server": {
@@ -116,92 +80,106 @@ This project provides several MCP servers that enable AI assistants like Claude 
 }
 ```
 
-#### Streamable
+🌐 Streamable HTTP (Hosted API Mode)
 
-1. Run locally
-
-```shell
-npx scrapeless-mcp-server --mode=streamable_http --SCRAPELESS_KEY=YOUR_SCRAPELESS_KEY
-```
-
-2. Add mcp configuration
-
-```json
+```JSON
 {
   "mcpServers": {
     "Scrapeless MCP Server": {
       "type": "streamable-http",
-      "url": "http://127.0.0.1:9593/mcp",
-      "disabled": false
+      "url": "https://api.scrapeless.com/mcp",
+      "headers": {
+        "x-api-token": "YOUR_SCRAPELESS_KEY"
+      },
+      "disabled": false,
+      "alwaysAllow": []
     }
   }
 }
 ```
 
-## Example Queries
+#### Advanced Options
 
-Here are some examples of how to use these servers with Claude Desktop:
+Customize browser session behavior with optional parameters. These can be set via environment variables (for Stdio) or HTTP headers (for Streamable HTTP):
 
-### browser
+| Stdio (Env Var)         | Streamable HTTP (HTTP Header) | Description                                                  |
+| ----------------------- | ----------------------------- | ------------------------------------------------------------ |
+| BROWSER_PROFILE_ID      | x-browser-profile-id          | Specifies a reusable browser profile ID for session continuity. |
+| BROWSER_PROFILE_PERSIST | x-browser-profile-persist     | Enables persistent storage for cookies, local storage, etc.  |
+| BROWSER_SESSION_TTL     | x-browser-session-ttl         | Defines the **maximum session timeout** in seconds. The session will automatically expire after this duration of inactivity. |
 
-Use a browser to visit chatgpt.com, search for "What's the weather like today?", and summarize the results.
 
-### scrape_html
+## Integration with Claude Desktop
 
-Scrape the html content of scrapeless.com page
+1. Open **Claude Desktop**
+2. Navigate to: `Settings` → `Tools` → `MCP Servers`
+3. Click **"Add MCP Server"**
+4. Paste either the `Stdio` or `Streamable HTTP` config above
+5. Save and enable the server
+6. Claude will now be able to issue web queries, extract content, and interact with pages using Scrapeless
 
-### scrape_markdown
+## Integration with Cursor IDE
 
-Scrape the markdown content of scrapeless.com page
+1. Open **Cursor**
+2. Press `Cmd + Shift + P` and search for: `Configure MCP Servers`
+3. Add the Scrapeless MCP config using the format above
+4. Save the file and restart Cursor (if needed)
+5. Now you can ask Cursor things like:
+   1. `"Search StackOverflow for a solution to this error"`
+   2. `"Scrape the HTML from this page"`
+6. And it will use Scrapeless in the background.
 
-### scrape_screenshot
+## Supported MCP Tools
 
-Get screenshots of scrapeless.com
+| Name               | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| google_search      | Universal information search engine.              |
+| google_flights     | Exclusive flight information query tool.          |
+| google_trends      | Get trending search data from Google Trends.      |
+| google_scholar     | Search for academic papers on Google Scholar.     |
+| browser_goto       | Navigate browser to a specified URL.              |
+| browser_go_back    | Go back one step in browser history.              |
+| browser_go_forward | Go forward one step in browser history.           |
+| browser_click      | Click a specific element on the page.             |
+| browser_type       | Type text into a specified input field.           |
+| browser_press_key  | Simulate a key press.                             |
+| browser_wait_for   | Wait for a specific page element to appear.       |
+| browser_wait       | Pause execution for a fixed duration.             |
+| browser_screenshot | Capture a screenshot of the current page.         |
+| browser_get_html   | Get the full HTML of the current page.            |
+| browser_get_text   | Get all visible text from the current page.       |
+| browser_scroll     | Scroll to the bottom of the page.                 |
+| browser_scroll_to  | Scroll a specific element into view.              |
+| scrape_html        | Scrape a URL and return its full HTML content.    |
+| scrape_markdown    | Scrape a URL and return its content as Markdown.  |
+| scrape_screenshot  | Capture a high-quality screenshot of any webpage. |
 
-### google_flights
+## Security Best Practices
 
-Please help me with my flight ticket from Chicago to New York on November 20, 2025
+When using Scrapeless MCP Server with LLMs (like ChatGPT, Claude, or Cursor), it's critical to handle all scraped or extracted web content with care. **Web data is untrusted by default**, and improper handling may expose your application to prompt injection or other security vulnerabilities.
 
-### google_scholar
+#### ✅ Recommended Practices
 
-Find papers by "Yoshua Bengio" on deep learning
+- **Never pass raw scraped content directly into LLM prompts.** Raw HTML, JavaScript, or user-generated text may contain hidden injection payloads.
+- **Sanitize and validate all extracted content.** Strip or escape potentially harmful tags and scripts before using content in downstream logic or AI models.
+- **Prefer structured extraction over free-form text.** Use tools like `scrape_html`, `scrape_markdown`, or targeted `browser_get_text` with known-safe selectors to extract only the content you trust.
+- **Apply domain or selector whitelisting** when scraping dynamically generated pages, to restrict data flow to known and trusted sources.
+- **Log and monitor all outbound requests** made via browser or scraping tools, especially if you're handling sensitive data, tokens, or internal network access.
 
-### google_search
+#### 🚫 Avoid
 
-Search scrapeless by google search
-
-### google_trends
-
-Find the search interest for "AI" over the last year
-
-## Installation
-
-### Prerequisites
-
-- Node.js 22 or higher
-- NPM or Yarn
-
-### Install from Source
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/scrapeless-ai/scrapeless-mcp-server.git
-cd scrapeless-mcp-server
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Build the server:
-
-```bash
-npm run build
-```
+- Injecting scraped HTML directly into prompts
+- Letting users specify arbitrary URLs or CSS selectors without validation
+- Storing unfiltered scraped content for future prompt usage
 
 ## Community
 
 - [MCP Server Discord](https://backend.scrapeless.com/app/api/v1/public/links/discord)
+
+## Contact Us
+
+For questions, suggestions, or collaboration inquiries, feel free to contact us via:
+
+- Email: [market@scrapeless.com](mailto:market@scrapeless.com)
+- Official Website: [https://www.scrapeless.com](https://www.scrapeless.com/)
+- Community Forum: https://discord.gg/Np4CAHxB9a
