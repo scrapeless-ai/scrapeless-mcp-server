@@ -1,4 +1,5 @@
 import { Scrapeless } from "@scrapeless-ai/sdk";
+import { getParamValue } from "@chatmcp/sdk/utils/index.js";
 import puppeteer from "puppeteer-core";
 
 import type { Browser, Page } from "puppeteer-core";
@@ -16,7 +17,11 @@ export class SessionManager {
     this.sessions = new Map<string, BrowserSession>();
   }
 
-  async createSession(id: string, apiKey: string) {
+  async createSession(
+    id: string,
+    apiKey: string,
+    headers?: Record<string, string>
+  ) {
     if (!this.sessions.has(id)) {
       this.sessions.set(id, { browser: null, page: null, closed: true });
     }
@@ -24,7 +29,24 @@ export class SessionManager {
     const scrapelessClient = new Scrapeless({ apiKey });
 
     const session = this.sessions.get(id) as BrowserSession;
-    const { browserWSEndpoint } = scrapelessClient.browser.create();
+    const { browserWSEndpoint } = scrapelessClient.browser.create({
+      session_ttl: Number(
+        process.env.BROWSER_SESSION_TTL ||
+          getParamValue("BROWSER_SESSION_TTL") ||
+          headers?.["x-browser-session-ttl"] ||
+          30000
+      ),
+      profile_id:
+        process.env.BROWSER_PROFILE_ID ||
+        getParamValue("BROWSER_PROFILE_ID") ||
+        headers?.["x-browser-profile-id"] ||
+        "",
+      profile_persist: Boolean(
+        process.env.BROWSER_PROFILE_PERSIST ||
+          getParamValue("BROWSER_PROFILE_PERSIST") ||
+          headers?.["x-browser-profile-persist"]
+      ),
+    });
     const browser = await puppeteer.connect({
       browserWSEndpoint,
       defaultViewport: null,

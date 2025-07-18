@@ -18,12 +18,15 @@ export class Context {
   }
 
   public getSession(id?: string) {
-    return this.sessionManager.getSession(`${id ?? this.currentSessionId}-${this.apiKey}`);
+    return this.sessionManager.getSession(
+      `${id ?? this.currentSessionId}-${this.apiKey}`
+    );
   }
 
   async run(
     tool: BrowserTool,
     params: any,
+    headers?: Record<string, string>
   ): Promise<CallToolResult> {
     if (!this.apiKey) {
       return {
@@ -44,7 +47,11 @@ export class Context {
     if (toolName === "browser_create") {
       const newSessionId = uuid();
       try {
-        await this.sessionManager.createSession(`${newSessionId}-${this.apiKey}`, this.apiKey);
+        await this.sessionManager.createSession(
+          `${newSessionId}-${this.apiKey}`,
+          this.apiKey,
+          headers
+        );
         return {
           content: [
             {
@@ -100,10 +107,15 @@ export class Context {
     }
 
     let session: BrowserSession | null = null;
-    session = this.sessionManager.getSession(`${this.currentSessionId}-${this.apiKey}`);
+    session = this.sessionManager.getSession(
+      `${this.currentSessionId}-${this.apiKey}`
+    );
     if (!session) {
       const newSessionId = uuid();
-      await this.sessionManager.createSession(`${newSessionId}-${this.apiKey}`, this.apiKey);
+      await this.sessionManager.createSession(
+        `${newSessionId}-${this.apiKey}`,
+        this.apiKey
+      );
       this.currentSessionId = newSessionId;
     }
 

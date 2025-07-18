@@ -48,7 +48,8 @@ export type Tool<Input extends InputType = InputType> = {
   inputSchema: Input;
   handle: (
     params: z.objectOutputType<Input, ZodTypeAny>,
-    client: ScrapelessClient
+    client: ScrapelessClient,
+    headers?: Record<string, string>
   ) => Promise<CallToolResult>;
 };
 
@@ -58,7 +59,8 @@ export type BrowserTool<Input extends InputType = InputType> = {
   inputSchema: Input;
   handle?: (
     context: Context,
-    params: z.objectOutputType<Input, ZodTypeAny>
+    params: z.objectOutputType<Input, ZodTypeAny>,
+    headers?: Record<string, string>
   ) => Promise<CallToolResult>;
 };
 

@@ -136,6 +136,8 @@ function createRemoteServerList(
     res.end("Unauthorized: Missing x-api-token header");
     return null;
   }
-  const serverList = new ServerList(async () => createMcpServer(apiKey));
+  const serverList = new ServerList(async () =>
+    createMcpServer({ headers: req.headers as Record<string, string>, apiKey })
+  );
   return serverList;
 }
