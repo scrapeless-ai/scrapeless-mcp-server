@@ -3,7 +3,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { initMcpTools, serverOptions } from "./server.js";
 import { API_KEY_NAME } from "./config.js";
 
-type Props = { apiKey: string };
+type Props = { apiKey: string, headers: any };
 type Env = any
 type State = null;
 type ExecutionContext = any
@@ -12,7 +12,7 @@ export class CfMcpServer extends McpAgent<Env, State, Props> {
   server = new McpServer(serverOptions);
 
   async init() {
-    initMcpTools(this.server, this.props.apiKey)
+    initMcpTools(this.server, this.props.headers, this.props.apiKey)
   }
 }
 
@@ -24,7 +24,7 @@ export default {
       return new Response(`Unauthorized: Missing ${API_KEY_NAME} header`, { status: 401 });
     }
 
-    ctx.props = { apiKey: apiKeyHeader };
+    ctx.props = { apiKey: apiKeyHeader, headers: request.headers };
 
     if (url.pathname === "/sse" || url.pathname === "/sse/message") {
       return CfMcpServer.serveSSE("/sse").fetch(request, env, ctx);

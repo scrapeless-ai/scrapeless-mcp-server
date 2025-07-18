@@ -98,6 +98,17 @@ Scrapeless MCP Server supports both **Stdio** and **Streamable HTTP** transport 
 }
 ```
 
+#### Advanced Options
+
+Customize browser session behavior with optional parameters. These can be set via environment variables (for Stdio) or HTTP headers (for Streamable HTTP):
+
+| Stdio (Env Var)         | Streamable HTTP (HTTP Header) | Description                                                  |
+| ----------------------- | ----------------------------- | ------------------------------------------------------------ |
+| BROWSER_PROFILE_ID      | x-browser-profile-id          | Specifies a reusable browser profile ID for session continuity. |
+| BROWSER_PROFILE_PERSIST | x-browser-profile-persist     | Enables persistent storage for cookies, local storage, etc.  |
+| BROWSER_SESSION_TTL     | x-browser-session-ttl         | Defines the **maximum session timeout** in seconds. The session will automatically expire after this duration of inactivity. |
+
+
 ## Integration with Claude Desktop
 
 1. Open **Claude Desktop**

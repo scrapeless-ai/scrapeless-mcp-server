@@ -2,9 +2,9 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { ScrapelessClient } from "@scrapeless-ai/sdk";
 import { SCRAPELESS_CONFIG, API_KEY } from "./config.js";
-import * as toolsList from './tools/index.js';
-import * as browserTools from './tools/browser/browser.js';
-import { Context } from './context.js';
+import * as toolsList from "./tools/index.js";
+import * as browserTools from "./tools/browser/browser.js";
+import { Context } from "./context.js";
 
 export const serverOptions = {
   name: "scrapeless-mcp-server",
@@ -12,13 +12,20 @@ export const serverOptions = {
   capabilities: { resources: {}, tools: {} },
 };
 
-export const createMcpServer = (apiKey?: string) => {
+export const createMcpServer = (options?: {
+  headers?: Record<string, string>;
+  apiKey?: string;
+}) => {
   const server = new McpServer(serverOptions);
-  initMcpTools(server, apiKey)
-  return server.server
+  initMcpTools(server, options?.headers, options?.apiKey);
+  return server.server;
 };
 
-export const initMcpTools = (server: McpServer, apiKey?: string) => {
+export const initMcpTools = (
+  server: McpServer,
+  headers?: Record<string, string>,
+  apiKey?: string
+) => {
   const getScrapelessClient = () => {
     if (apiKey) {
       return new ScrapelessClient({
@@ -32,13 +39,10 @@ export const initMcpTools = (server: McpServer, apiKey?: string) => {
 
   // tools registration
   Object.values(toolsList).forEach((tool) => {
-    server.tool(
-      tool.name,
-      tool.description,
-      tool.inputSchema,
-      (params: any) => tool.handle(params, getScrapelessClient())
+    server.tool(tool.name, tool.description, tool.inputSchema, (params: any) =>
+      tool.handle(params, getScrapelessClient())
     );
-  })
+  });
 
   const context = new Context(apiKey ?? API_KEY);
 
@@ -48,12 +52,12 @@ export const initMcpTools = (server: McpServer, apiKey?: string) => {
       tool.description,
       tool.inputSchema,
       async (params: any) => {
-        const result = await context.run(tool, params);
+        const result = await context.run(tool, params, headers);
         return result;
       }
     );
   });
-}
+};
 
 export class ServerList {
   private _servers: Server[] = [];
@@ -71,12 +75,11 @@ export class ServerList {
 
   async close(server: Server) {
     const index = this._servers.indexOf(server);
-    if (index !== -1)
-      this._servers.splice(index, 1);
+    if (index !== -1) this._servers.splice(index, 1);
     await server.close();
   }
 
   async closeAll() {
-    await Promise.all(this._servers.map(server => server.close()));
+    await Promise.all(this._servers.map((server) => server.close()));
   }
 }

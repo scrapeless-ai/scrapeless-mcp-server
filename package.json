@@ -31,7 +31,7 @@
   "dependencies": {
     "@chatmcp/sdk": "^1.0.5",
     "@modelcontextprotocol/sdk": "^1.8.0",
-    "@scrapeless-ai/sdk": "^1.6.1",
+    "@scrapeless-ai/sdk": "^1.8.0",
     "agents": "^0.0.101",
     "axios": "^1.8.4",
     "express": "^5.1.0",
