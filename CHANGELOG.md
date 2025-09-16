@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.7](https://github.com/scrapeless-ai/scrapeless-mcp-server/compare/v0.4.6...v0.4.7) (2025-09-16)
+
 ### [0.4.6](https://github.com/scrapeless-ai/scrapeless-mcp-server/compare/v0.4.1...v0.4.6) (2025-09-16)
 
 
