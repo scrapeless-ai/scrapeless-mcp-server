@@ -6,7 +6,7 @@
 
 Built on the open MCP standard, Scrapeless MCP Server seamlessly connects models like **ChatGPT**, **Claude**, and tools like **Cursor** and **Windsurf** to a wide range of external capabilities, including:
 
-- **Google services integration** (Search, Flights, Trends, Scholar, etc.)
+- **Google services integration** (Search, Trends)
 - **Browser automation** for page-level navigation and interaction
 - **Scrape** dynamic, JS-heavy sites—export as HTML, Markdown, or screenshots
 
@@ -42,8 +42,6 @@ Here are some additional examples of how to use these servers:
 
 | Example                                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------------------- |
-| Please help me with my flight ticket from Chicago to New York on November 20, 2025.                                               |
-| Find papers by "Yoshua Bengio" on deep learning.                                                                                  |
 | Search scrapeless by Google search.                                                                                               |
 | Find the search interest for "AI" over the last year.                                                                             |
 | Use a browser to visit [chatgpt.com](http://chatgpt.com), search for "What's the weather like today?", and summarize the results. |
@@ -134,9 +132,7 @@ Customize browser session behavior with optional parameters. These can be set vi
 | Name               | Description                                       |
 | ------------------ | ------------------------------------------------- |
 | google_search      | Universal information search engine.              |
-| google_flights     | Exclusive flight information query tool.          |
 | google_trends      | Get trending search data from Google Trends.      |
-| google_scholar     | Search for academic papers on Google Scholar.     |
 | browser_goto       | Navigate browser to a specified URL.              |
 | browser_go_back    | Go back one step in browser history.              |
 | browser_go_forward | Go forward one step in browser history.           |
