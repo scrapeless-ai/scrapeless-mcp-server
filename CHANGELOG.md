@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.6](https://github.com/scrapeless-ai/scrapeless-mcp-server/compare/v0.4.1...v0.4.6) (2025-09-16)
+
+
+### Features
+
+* add browser tool `browser_press_key` ([0bc5119](https://github.com/scrapeless-ai/scrapeless-mcp-server/commit/0bc5119324e97166e3865ae45cd66991c1d0dcc2))
+* add context manager ([3ef9395](https://github.com/scrapeless-ai/scrapeless-mcp-server/commit/3ef9395a27a49d8db7bad389e1cf2bbb3be3b4ed))
+* browser profiles ([0b924f6](https://github.com/scrapeless-ai/scrapeless-mcp-server/commit/0b924f6b1587f8a975806f6c191b72711b849665))
+
 ### [0.4.5](https://github.com/scrapeless-ai/scrapeless-mcp-server/compare/v0.4.4...v0.4.5) (2025-07-18)
 
 
