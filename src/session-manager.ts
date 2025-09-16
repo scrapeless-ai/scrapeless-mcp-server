@@ -11,10 +11,18 @@ export interface BrowserSession {
 }
 
 export class SessionManager {
+  private static instance: SessionManager;
   private sessions: Map<string, BrowserSession>;
 
-  constructor() {
+  private constructor() {
     this.sessions = new Map<string, BrowserSession>();
+  }
+
+  public static getInstance(): SessionManager {
+    if (!SessionManager.instance) {
+      SessionManager.instance = new SessionManager();
+    }
+    return SessionManager.instance;
   }
 
   async createSession(
@@ -58,6 +66,7 @@ export class SessionManager {
       session.closed = true;
       session.browser = null;
       session.page = null;
+      this.sessions.delete(id);
     });
 
     session.browser = browser;

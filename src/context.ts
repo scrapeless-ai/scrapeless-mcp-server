@@ -13,7 +13,7 @@ export class Context {
   private currentSessionId: string = "default-session-id";
   private apiKey: string | undefined;
   constructor(apiKey?: string) {
-    this.sessionManager = new SessionManager();
+    this.sessionManager = SessionManager.getInstance();
     this.apiKey = apiKey;
   }
 

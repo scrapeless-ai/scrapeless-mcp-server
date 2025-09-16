@@ -4,7 +4,7 @@ import { ScrapelessClient } from "@scrapeless-ai/sdk";
 import { SCRAPELESS_CONFIG, API_KEY } from "./config.js";
 import * as toolsList from "./tools/index.js";
 import * as browserTools from "./tools/browser/browser.js";
-import { Context } from "./context.js";
+import { ContextManager } from "./context-manager.js";
 
 export const serverOptions = {
   name: "scrapeless-mcp-server",
@@ -44,7 +44,7 @@ export const initMcpTools = (
     );
   });
 
-  const context = new Context(apiKey ?? API_KEY);
+  const context = ContextManager.getInstance().getContext(apiKey ?? API_KEY);
 
   Object.values(browserTools).forEach((tool) => {
     server.tool(
