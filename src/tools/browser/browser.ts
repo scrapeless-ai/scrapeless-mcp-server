@@ -1,5 +1,10 @@
 import { z } from "zod";
-import { BrowserTool, defineTool, wrapMcpBrowserResponse, snapshot } from "../utils.js";
+import {
+  BrowserTool,
+  defineTool,
+  wrapMcpBrowserResponse,
+  snapshot,
+} from "../utils.js";
 import { Context } from "../../context.js";
 
 export const browserCreate = defineTool<z.ZodRawShape, BrowserTool>({
@@ -62,14 +67,10 @@ export const browserGoto = defineTool<z.ZodRawShape, BrowserTool>({
       content: [
         {
           type: "text",
-          text: `Navigated to ${params.url}`,
+          text: accessibilitySnapshot,
         },
-        {
-          type: "text",
-          text: accessibilitySnapshot
-        }
       ],
-    }
+    };
   },
 });
 
@@ -100,10 +101,6 @@ export const browserGoBack = defineTool<z.ZodRawShape, BrowserTool>({
 
     return {
       content: [
-        {
-          type: "text",
-          text: "Navigated back.",
-        },
         {
           type: "text",
           text: accessibilitySnapshot,
@@ -140,10 +137,6 @@ export const browserGoForward = defineTool<z.ZodRawShape, BrowserTool>({
 
     return {
       content: [
-        {
-          type: "text",
-          text: "Navigated forward.",
-        },
         {
           type: "text",
           text: accessibilitySnapshot,
@@ -183,13 +176,9 @@ export const browserClick = defineTool<z.ZodRawShape, BrowserTool>({
         content: [
           {
             type: "text",
-            text: `Clicked on element with selector ${params.selector}`
+            text: accessibilitySnapshot,
           },
-          {
-            type: "text",
-            text: accessibilitySnapshot
-          }
-        ]
+        ],
       };
     } catch (error) {
       return wrapMcpBrowserResponse(
@@ -230,13 +219,9 @@ export const browserType = defineTool<z.ZodRawShape, BrowserTool>({
         content: [
           {
             type: "text",
-            text: `Typed ${params.text} into element with selector ${params.selector}`
+            text: accessibilitySnapshot,
           },
-          {
-            type: "text",
-            text: accessibilitySnapshot
-          }
-        ]
+        ],
       };
     } catch (error) {
       return wrapMcpBrowserResponse(
@@ -316,6 +301,44 @@ export const browserWait = defineTool<z.ZodRawShape, BrowserTool>({
   },
 });
 
+export const browserSnapshot = defineTool<z.ZodRawShape, BrowserTool>({
+  name: "browser_snapshot",
+  description: `Capture the complete structure of a webpage, including DOM and resources, for inspection and analysis.`,
+  inputSchema: {
+    sessionId: z
+      .string()
+      .optional()
+      .describe(
+        "Optional session ID to use/reuse. If not provided or invalid, the active session is used."
+      ),
+  },
+  handle: async (context: Context, params) => {
+    const session = context.getSession(params.sessionId);
+    if (!session?.page) {
+      return wrapMcpBrowserResponse(
+        "No active browser session found. Please create a browser session first."
+      );
+    }
+
+    try {
+      const accessibilitySnapshot = await snapshot(session.page);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: accessibilitySnapshot,
+          },
+        ],
+      };
+    } catch (error) {
+      return {
+        content: [],
+      };
+    }
+  },
+});
+
 export const browserScreenshot = defineTool<z.ZodRawShape, BrowserTool>({
   name: "browser_screenshot",
   description: `Capture a screenshot of the current page.
@@ -365,7 +388,7 @@ export const browserScreenshot = defineTool<z.ZodRawShape, BrowserTool>({
           {
             type: "text",
             text: accessibilitySnapshot,
-          }
+          },
         ],
       };
     } catch (error) {
@@ -473,10 +496,6 @@ export const browserScroll = defineTool<z.ZodRawShape, BrowserTool>({
         content: [
           {
             type: "text",
-            text: `Scrolled to the bottom of the page.`,
-          },
-          {
-            type: "text",
             text: accessibilitySnapshot,
           },
         ],
@@ -526,10 +545,6 @@ export const browserScrollTo = defineTool<z.ZodRawShape, BrowserTool>({
         content: [
           {
             type: "text",
-            text: `Scrolled to position (${params.x}, ${params.y})`,
-          },
-          {
-            type: "text",
             text: accessibilitySnapshot,
           },
         ],
@@ -549,8 +564,15 @@ export const browserPressKey = defineTool<z.ZodRawShape, BrowserTool>({
     Valid: Press Enter in #search.
     Invalid: Press a key without specifying the key name.`,
   inputSchema: {
-    selector: z.string().describe("The CSS selector of the element to focus.").optional(),
-    key: z.string().describe('Name of the key to press or a character to generate, such as `ArrowLeft` or `a`'),
+    selector: z
+      .string()
+      .describe("The CSS selector of the element to focus.")
+      .optional(),
+    key: z
+      .string()
+      .describe(
+        "Name of the key to press or a character to generate, such as `ArrowLeft` or `a`"
+      ),
   },
   handle: async (context: Context, params) => {
     const session = context.getSession(params.sessionId);
@@ -568,10 +590,6 @@ export const browserPressKey = defineTool<z.ZodRawShape, BrowserTool>({
       const accessibilitySnapshot = await snapshot(session.page);
       return {
         content: [
-          {
-            type: "text",
-            text: params.selector ? `Focus on the ${params.selector} and press ${params.key}` : `press ${params.key}`,
-          },
           {
             type: "text",
             text: accessibilitySnapshot,
