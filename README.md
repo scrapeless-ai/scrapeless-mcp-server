@@ -100,12 +100,11 @@ Scrapeless MCP Server supports both **Stdio** and **Streamable HTTP** transport 
 
 Customize browser session behavior with optional parameters. These can be set via environment variables (for Stdio) or HTTP headers (for Streamable HTTP):
 
-| Stdio (Env Var)         | Streamable HTTP (HTTP Header) | Description                                                  |
-| ----------------------- | ----------------------------- | ------------------------------------------------------------ |
-| BROWSER_PROFILE_ID      | x-browser-profile-id          | Specifies a reusable browser profile ID for session continuity. |
-| BROWSER_PROFILE_PERSIST | x-browser-profile-persist     | Enables persistent storage for cookies, local storage, etc.  |
+| Stdio (Env Var)         | Streamable HTTP (HTTP Header) | Description                                                                                                                  |
+| ----------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| BROWSER_PROFILE_ID      | x-browser-profile-id          | Specifies a reusable browser profile ID for session continuity.                                                              |
+| BROWSER_PROFILE_PERSIST | x-browser-profile-persist     | Enables persistent storage for cookies, local storage, etc.                                                                  |
 | BROWSER_SESSION_TTL     | x-browser-session-ttl         | Defines the **maximum session timeout** in seconds. The session will automatically expire after this duration of inactivity. |
-
 
 ## Integration with Claude Desktop
 
@@ -129,26 +128,28 @@ Customize browser session behavior with optional parameters. These can be set vi
 
 ## Supported MCP Tools
 
-| Name               | Description                                       |
-| ------------------ | ------------------------------------------------- |
-| google_search      | Universal information search engine.              |
-| google_trends      | Get trending search data from Google Trends.      |
-| browser_goto       | Navigate browser to a specified URL.              |
-| browser_go_back    | Go back one step in browser history.              |
-| browser_go_forward | Go forward one step in browser history.           |
-| browser_click      | Click a specific element on the page.             |
-| browser_type       | Type text into a specified input field.           |
-| browser_press_key  | Simulate a key press.                             |
-| browser_wait_for   | Wait for a specific page element to appear.       |
-| browser_wait       | Pause execution for a fixed duration.             |
-| browser_screenshot | Capture a screenshot of the current page.         |
-| browser_get_html   | Get the full HTML of the current page.            |
-| browser_get_text   | Get all visible text from the current page.       |
-| browser_scroll     | Scroll to the bottom of the page.                 |
-| browser_scroll_to  | Scroll a specific element into view.              |
-| scrape_html        | Scrape a URL and return its full HTML content.    |
-| scrape_markdown    | Scrape a URL and return its content as Markdown.  |
-| scrape_screenshot  | Capture a high-quality screenshot of any webpage. |
+| Name               | Description                                                    |
+| ------------------ | -------------------------------------------------------------- |
+| google_search      | Universal information search engine.                           |
+| google_trends      | Get trending search data from Google Trends.                   |
+| browser_create     | Create or reuse a cloud browser session using Scrapeless.      |
+| browser_close      | Closes the current session by disconnecting the cloud browser. |
+| browser_goto       | Navigate browser to a specified URL.                           |
+| browser_go_back    | Go back one step in browser history.                           |
+| browser_go_forward | Go forward one step in browser history.                        |
+| browser_click      | Click a specific element on the page.                          |
+| browser_type       | Type text into a specified input field.                        |
+| browser_press_key  | Simulate a key press.                                          |
+| browser_wait_for   | Wait for a specific page element to appear.                    |
+| browser_wait       | Pause execution for a fixed duration.                          |
+| browser_screenshot | Capture a screenshot of the current page.                      |
+| browser_get_html   | Get the full HTML of the current page.                         |
+| browser_get_text   | Get all visible text from the current page.                    |
+| browser_scroll     | Scroll to the bottom of the page.                              |
+| browser_scroll_to  | Scroll a specific element into view.                           |
+| scrape_html        | Scrape a URL and return its full HTML content.                 |
+| scrape_markdown    | Scrape a URL and return its content as Markdown.               |
+| scrape_screenshot  | Capture a high-quality screenshot of any webpage.              |
 
 ## Security Best Practices
 
