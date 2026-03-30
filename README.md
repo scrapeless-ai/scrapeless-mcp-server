@@ -12,6 +12,10 @@ Built on the open MCP standard, Scrapeless MCP Server seamlessly connects models
 
 Whether you're building an AI research assistant, a coding copilot, or autonomous web agents, this server provides the dynamic context and real-world data your workflows need—**without getting blocked**.
 
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/scrapeless-ai-scrapeless-mcp-server).
+
 ## Usage Examples
 
 1. Automated Web Interaction and Data Extraction with Claude
