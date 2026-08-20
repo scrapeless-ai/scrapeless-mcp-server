@@ -23,7 +23,8 @@
     "cursor",
     "claude",
     "ai",
-    "model-context-protocol"
+    "model-context-protocol",
+    "crawl"
   ],
   "author": "",
   "license": "ISC",

@@ -40,7 +40,7 @@ export const initMcpTools = (
   // tools registration
   Object.values(toolsList).forEach((tool) => {
     server.tool(tool.name, tool.description, tool.inputSchema, (params: any) =>
-      tool.handle(params, getScrapelessClient())
+      tool.handle(params, getScrapelessClient(), headers)
     );
   });
 
