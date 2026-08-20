@@ -9,6 +9,7 @@ Built on the open MCP standard, Scrapeless MCP Server seamlessly connects models
 - **Google services integration** (Search, Trends)
 - **Browser automation** for page-level navigation and interaction
 - **Scrape** dynamic, JS-heavy sites—export as HTML, Markdown, or screenshots
+- **Crawl** entire websites by following links and capture each page in multiple formats
 
 Whether you're building an AI research assistant, a coding copilot, or autonomous web agents, this server provides the dynamic context and real-world data your workflows need—**without getting blocked**.
 
@@ -150,6 +151,9 @@ Customize browser session behavior with optional parameters. These can be set vi
 | scrape_html        | Scrape a URL and return its full HTML content.                 |
 | scrape_markdown    | Scrape a URL and return its content as Markdown.               |
 | scrape_screenshot  | Capture a high-quality screenshot of any webpage.              |
+| crawl_start        | Start an asynchronous crawl job from a base URL and return its job id. |
+| crawl_cancel       | Cancel an in-progress crawl job by its id.                     |
+| crawl_result       | Poll a crawl job by its id until it completes and return the crawled data. |
 
 ## Security Best Practices
 

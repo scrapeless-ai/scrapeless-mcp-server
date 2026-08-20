@@ -36,3 +36,6 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 /static
+
+# Environment variables
+.env

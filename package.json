@@ -1,6 +1,6 @@
 {
   "name": "scrapeless-mcp-server",
-  "version": "0.4.9",
+  "version": "0.5.0",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -23,7 +23,8 @@
     "cursor",
     "claude",
     "ai",
-    "model-context-protocol"
+    "model-context-protocol",
+    "crawl"
   ],
   "author": "",
   "license": "ISC",

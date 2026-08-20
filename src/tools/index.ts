@@ -3,3 +3,6 @@ export * from "./deepserp/googleTrends.js";
 export * from "./universal/scrapeHtml.js";
 export * from "./universal/scrapeMarkdown.js";
 export * from "./universal/scrapeScreenshot.js";
+export * from "./crawl/crawlStart.js";
+export * from "./crawl/crawlCancel.js";
+export * from "./crawl/crawlResult.js";
