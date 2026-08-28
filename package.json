@@ -24,7 +24,8 @@
     "claude",
     "ai",
     "model-context-protocol",
-    "crawl"
+    "crawl",
+    "llm-chat-scraper"
   ],
   "author": "",
   "license": "ISC",
