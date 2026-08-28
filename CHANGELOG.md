@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/scrapeless-ai/scrapeless-mcp-server/compare/v0.5.0...v0.6.0) (2026-08-28)
+
+
+### Features
+
+* 🎸 add llm-chat-scraper tool ([2b06ea6](https://github.com/scrapeless-ai/scrapeless-mcp-server/commit/2b06ea6e40dd51cb3453ce67f1b4cb769ebb9c5d))
+
 ## 0.5.0 (2026-08-20)
 
 

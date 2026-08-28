@@ -154,6 +154,7 @@ Customize browser session behavior with optional parameters. These can be set vi
 | crawl_start        | Start an asynchronous crawl job from a base URL and return its job id. |
 | crawl_cancel       | Cancel an in-progress crawl job by its id.                     |
 | crawl_result       | Poll a crawl job by its id until it completes and return the crawled data. |
+| llm_chat_scraper   | Create an LLM Chat Scraper task for ChatGPT, Gemini, Perplexity, Copilot, Google AI Mode, Google AI Overview, Grok, or Alexa. |
 
 ## Security Best Practices
 
