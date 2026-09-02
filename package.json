@@ -19,17 +19,18 @@
     "mcp",
     "google",
     "google search",
+    "browser",
     "serpapi",
     "cursor",
     "claude",
     "ai",
     "model-context-protocol",
     "crawl",
-    "llm-chat-scraper"
+    "ai scraper"
   ],
   "author": "",
   "license": "ISC",
-  "description": "Scrapeless Mcp Server",
+  "description": "Scrapeless MCP Server gives AI agents a unified interface for web search, browser automation, web scraping, crawling, CAPTCHA solving and LLM response collection.",
   "dependencies": {
     "@chatmcp/sdk": "^1.0.5",
     "@modelcontextprotocol/sdk": "^1.8.0",

@@ -12,7 +12,7 @@ async function main() {
       startHttpTransport(Number(ServerPort), ServerHostname);
     } else {
       if (!API_KEY)
-        throw new Error("❌ Missing environment variable: SCRAPELESS_KEY");
+        throw new Error("❌ Missing environment variable: SCRAPELESS_API_KEY");
       startStdioTransport();
     }
   } catch (error) {

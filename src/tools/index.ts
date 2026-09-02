@@ -6,4 +6,4 @@ export * from "./universal/scrapeScreenshot.js";
 export * from "./crawl/crawlStart.js";
 export * from "./crawl/crawlCancel.js";
 export * from "./crawl/crawlResult.js";
-export * from "./llm_chat_scraper/llmChatScraper.js";
+export * from "./ai_scraper/aiScraper.js";

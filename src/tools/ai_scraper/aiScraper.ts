@@ -4,9 +4,9 @@ import z from "zod";
 import { BASE_URL } from "../../config.js";
 import { defineTool } from "../utils.js";
 import {
-  getLlmChatScraperApi,
-  LLM_CHAT_SCRAPER_REQUEST_ENDPOINT,
-  LLM_CHAT_SCRAPER_RESULT_ENDPOINT,
+  getAiScraperApi,
+  AI_SCRAPER_REQUEST_ENDPOINT,
+  AI_SCRAPER_RESULT_ENDPOINT,
 } from "./api.js";
 
 const POLL_INTERVAL_MS = 5000;
@@ -170,11 +170,11 @@ const RESULT_FIELDS_BY_ACTOR: Record<Actor, readonly string[]> = {
   ],
 };
 
-const llmChatScraperSchema = z.object({
+const aiScraperSchema = z.object({
   prompt: z
     .string()
     .min(1)
-    .describe("Question or prompt to send to the selected LLM Chat Scraper actor."),
+    .describe("Question or prompt to send to the selected AI Scraper actor."),
   actor: z
     .enum(ACTOR_OPTIONS)
     .describe(
@@ -236,7 +236,7 @@ const llmChatScraperSchema = z.object({
     ),
 });
 
-type LlmChatScraperParams = z.infer<typeof llmChatScraperSchema>;
+type AiScraperParams = z.infer<typeof aiScraperSchema>;
 
 type PollResult = {
   taskId: string;
@@ -276,7 +276,7 @@ function normalizeCountry(country: string | undefined) {
   return normalized || "US";
 }
 
-function validateActorParams(params: LlmChatScraperParams) {
+function validateActorParams(params: AiScraperParams) {
   const config = ACTOR_CONFIG[params.actor];
 
   if (params.location && params.uule) {
@@ -351,7 +351,7 @@ function validateActorParams(params: LlmChatScraperParams) {
   return undefined;
 }
 
-function buildActorInput(params: LlmChatScraperParams, country: string) {
+function buildActorInput(params: AiScraperParams, country: string) {
   const actorInput: Record<string, unknown> = {
     prompt: params.prompt,
     country,
@@ -424,7 +424,7 @@ function formatPollHttpError(statusCode: number, responseData: unknown) {
     message:
       getStringField(responseData, "message") ||
       getStringField(responseData, "error") ||
-      `LLM chat scraper result request failed with HTTP ${statusCode}.`,
+      `AI scraper result request failed with HTTP ${statusCode}.`,
     response: responseData,
   };
 }
@@ -451,7 +451,7 @@ async function pollTask(
 
   while (true) {
     const response = await api.get(
-      `${LLM_CHAT_SCRAPER_RESULT_ENDPOINT}/${encodeURIComponent(taskId)}`,
+      `${AI_SCRAPER_RESULT_ENDPOINT}/${encodeURIComponent(taskId)}`,
       {
         validateStatus: () => true,
       }
@@ -533,7 +533,7 @@ async function pollTask(
           httpStatus: response.status,
           error: formatTaskResultError(
             "task_failed",
-            extractTaskMessage(response.data) || "LLM chat scraper task failed.",
+            extractTaskMessage(response.data) || "AI scraper task failed.",
             response.data
           ),
         };
@@ -587,10 +587,10 @@ async function pollTask(
 function timeoutHelp(taskId: string) {
   return {
     message:
-      "The LLM chat scraper task did not finish before the timeout. Fetch the result manually with the Scrapeless API.",
+      "The AI scraper task did not finish before the timeout. Fetch the result manually with the Scrapeless API.",
     manual_result_request: {
       method: "GET",
-      url: `${BASE_URL}${LLM_CHAT_SCRAPER_RESULT_ENDPOINT}/${taskId}`,
+      url: `${BASE_URL}${AI_SCRAPER_RESULT_ENDPOINT}/${taskId}`,
       headers: {
         "x-api-token": "YOUR_SCRAPELESS_KEY",
       },
@@ -619,15 +619,15 @@ function formatApiError(error: unknown) {
   };
 }
 
-export const llmChatScraper = defineTool({
-  name: "llm_chat_scraper",
-  description: `Create an LLM Chat Scraper task for an explicit Scrapeless actor, then poll every 5 seconds until the answer is ready or the timeout is reached.
+export const aiScraper = defineTool({
+  name: "ai_scraper",
+  description: `Create an AI Scraper task for an explicit Scrapeless actor, then poll every 5 seconds until the answer is ready or the timeout is reached.
     Supports ChatGPT, Gemini, Perplexity, Copilot, Google AI Mode, Google AI Overview, Grok, and Alexa.
     Defaults to a 3 minute timeout. The timeout can be set from 60 to 600 seconds.
     On timeout, returns the task_id and instructions for manually fetching the result.`,
-  inputSchema: llmChatScraperSchema.shape,
+  inputSchema: aiScraperSchema.shape,
   handle: async (rawParams, client, headers) => {
-    const params = llmChatScraperSchema.parse(rawParams);
+    const params = aiScraperSchema.parse(rawParams);
     const country = normalizeCountry(params.country);
     const actorConfig = ACTOR_CONFIG[params.actor];
     const startedAtMs = Date.now();
@@ -658,9 +658,9 @@ export const llmChatScraper = defineTool({
     let createResponseBody: unknown;
 
     try {
-      const api = getLlmChatScraperApi(client, headers);
+      const api = getAiScraperApi(client, headers);
       const createResponse = await api.post(
-        LLM_CHAT_SCRAPER_REQUEST_ENDPOINT,
+        AI_SCRAPER_REQUEST_ENDPOINT,
         taskRequest
       );
 

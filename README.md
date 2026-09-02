@@ -10,6 +10,7 @@ Built on the open MCP standard, Scrapeless MCP Server seamlessly connects models
 - **Browser automation** for page-level navigation and interaction
 - **Scrape** dynamic, JS-heavy sites—export as HTML, Markdown, or screenshots
 - **Crawl** entire websites by following links and capture each page in multiple formats
+- **AI Scraper** Create an AI Scraper task for ChatGPT, Gemini, Perplexity, Copilot, Google AI Mode, Google AI Overview, Grok, or Alexa
 
 Whether you're building an AI research assistant, a coding copilot, or autonomous web agents, this server provides the dynamic context and real-world data your workflows need—**without getting blocked**.
 
@@ -72,7 +73,7 @@ Scrapeless MCP Server supports both **Stdio** and **Streamable HTTP** transport 
       "command": "npx",
       "args": ["-y", "scrapeless-mcp-server"],
       "env": {
-        "SCRAPELESS_KEY": "YOUR_SCRAPELESS_KEY"
+        "SCRAPELESS_API_KEY": "YOUR_SCRAPELESS_KEY"
       }
     }
   }
@@ -129,32 +130,32 @@ Customize browser session behavior with optional parameters. These can be set vi
 
 ## Supported MCP Tools
 
-| Name               | Description                                                    |
-| ------------------ | -------------------------------------------------------------- |
-| google_search      | Universal information search engine.                           |
-| google_trends      | Get trending search data from Google Trends.                   |
-| browser_create     | Create or reuse a cloud browser session using Scrapeless.      |
-| browser_close      | Closes the current session by disconnecting the cloud browser. |
-| browser_goto       | Navigate browser to a specified URL.                           |
-| browser_go_back    | Go back one step in browser history.                           |
-| browser_go_forward | Go forward one step in browser history.                        |
-| browser_click      | Click a specific element on the page.                          |
-| browser_type       | Type text into a specified input field.                        |
-| browser_press_key  | Simulate a key press.                                          |
-| browser_wait_for   | Wait for a specific page element to appear.                    |
-| browser_wait       | Pause execution for a fixed duration.                          |
-| browser_screenshot | Capture a screenshot of the current page.                      |
-| browser_get_html   | Get the full HTML of the current page.                         |
-| browser_get_text   | Get all visible text from the current page.                    |
-| browser_scroll     | Scroll to the bottom of the page.                              |
-| browser_scroll_to  | Scroll a specific element into view.                           |
-| scrape_html        | Scrape a URL and return its full HTML content.                 |
-| scrape_markdown    | Scrape a URL and return its content as Markdown.               |
-| scrape_screenshot  | Capture a high-quality screenshot of any webpage.              |
-| crawl_start        | Start an asynchronous crawl job from a base URL and return its job id. |
-| crawl_cancel       | Cancel an in-progress crawl job by its id.                     |
-| crawl_result       | Poll a crawl job by its id until it completes and return the crawled data. |
-| llm_chat_scraper   | Create an LLM Chat Scraper task for ChatGPT, Gemini, Perplexity, Copilot, Google AI Mode, Google AI Overview, Grok, or Alexa. |
+| Name               | Description                                                                                                             |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------|
+| google_search      | Universal information search engine.                                                                                    |
+| google_trends      | Get trending search data from Google Trends.                                                                            |
+| browser_create     | Create or reuse a cloud browser session using Scrapeless.                                                               |
+| browser_close      | Closes the current session by disconnecting the cloud browser.                                                          |
+| browser_goto       | Navigate browser to a specified URL.                                                                                    |
+| browser_go_back    | Go back one step in browser history.                                                                                    |
+| browser_go_forward | Go forward one step in browser history.                                                                                 |
+| browser_click      | Click a specific element on the page.                                                                                   |
+| browser_type       | Type text into a specified input field.                                                                                 |
+| browser_press_key  | Simulate a key press.                                                                                                   |
+| browser_wait_for   | Wait for a specific page element to appear.                                                                             |
+| browser_wait       | Pause execution for a fixed duration.                                                                                   |
+| browser_screenshot | Capture a screenshot of the current page.                                                                               |
+| browser_get_html   | Get the full HTML of the current page.                                                                                  |
+| browser_get_text   | Get all visible text from the current page.                                                                             |
+| browser_scroll     | Scroll to the bottom of the page.                                                                                       |
+| browser_scroll_to  | Scroll a specific element into view.                                                                                    |
+| scrape_html        | Scrape a URL and return its full HTML content.                                                                          |
+| scrape_markdown    | Scrape a URL and return its content as Markdown.                                                                        |
+| scrape_screenshot  | Capture a high-quality screenshot of any webpage.                                                                       |
+| crawl_start        | Start an asynchronous crawl job from a base URL and return its job id.                                                  |
+| crawl_cancel       | Cancel an in-progress crawl job by its id.                                                                              |
+| crawl_result       | Poll a crawl job by its id until it completes and return the crawled data.                                              |
+| ai_scraper         | Create an AI Scraper task for ChatGPT, Gemini, Perplexity, Copilot, Google AI Mode, Google AI Overview, Grok, or Alexa. |
 
 ## Security Best Practices
 
@@ -164,7 +165,7 @@ When using Scrapeless MCP Server with LLMs (like ChatGPT, Claude, or Cursor), it
 
 - **Never pass raw scraped content directly into LLM prompts.** Raw HTML, JavaScript, or user-generated text may contain hidden injection payloads.
 - **Sanitize and validate all extracted content.** Strip or escape potentially harmful tags and scripts before using content in downstream logic or AI models.
-- **Prefer structured extraction over free-form text.** Use tools like `scrape_html`, `scrape_markdown`, or targeted `browser_get_text` with known-safe selectors to extract only the content you trust.
+- **Prefer structured extraction to free-form text.** Use tools like `scrape_html`, `scrape_markdown`, or targeted `browser_get_text` with known-safe selectors to extract only the content you trust.
 - **Apply domain or selector whitelisting** when scraping dynamically generated pages, to restrict data flow to known and trusted sources.
 - **Log and monitor all outbound requests** made via browser or scraping tools, especially if you're handling sensitive data, tokens, or internal network access.
 
