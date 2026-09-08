@@ -1,6 +1,6 @@
 {
   "name": "scrapeless-mcp-server",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "mcpName": "io.github.scrapeless-ai/scrapeless-mcp-server",
   "main": "index.js",
   "type": "module",
