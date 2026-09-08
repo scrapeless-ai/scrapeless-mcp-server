@@ -6,12 +6,12 @@
     "url": "https://github.com/scrapeless-ai/scrapeless-mcp-server",
     "source": "github"
   },
-  "version": "0.6.2",
+  "version": "0.6.3",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "scrapeless-mcp-server",
-      "version": "0.6.2",
+      "version": "0.6.3",
       "transport": {
         "type": "stdio"
       },
