@@ -6,7 +6,7 @@
     "url": "https://github.com/scrapeless-ai/scrapeless-mcp-server",
     "source": "github"
   },
-  "version": "0.6.3",
+  "version": "0.6.4",
   "packages": [
     {
       "registryType": "npm",
@@ -22,6 +22,20 @@
           "format": "string",
           "isSecret": true,
           "name": "SCRAPELESS_API_KEY"
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.scrapeless.com/mcp",
+      "headers": [
+        {
+          "name": "x-api-token",
+          "description": "Your Scrapeless API key. Get one from https://app.scrapeless.com",
+          "isRequired": true,
+          "isSecret": true
         }
       ]
     }
