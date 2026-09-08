@@ -1,0 +1,29 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.scrapeless-ai/scrapeless-mcp-server",
+  "description": "Web search, browser automation, scraping, crawling and CAPTCHA solving for AI agents.",
+  "repository": {
+    "url": "https://github.com/scrapeless-ai/scrapeless-mcp-server",
+    "source": "github"
+  },
+  "version": "0.6.2",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "scrapeless-mcp-server",
+      "version": "0.6.2",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "Your Scrapeless API key. Get one from https://app.scrapeless.com",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "SCRAPELESS_API_KEY"
+        }
+      ]
+    }
+  ]
+}

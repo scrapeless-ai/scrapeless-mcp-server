@@ -1,6 +1,7 @@
 {
   "name": "scrapeless-mcp-server",
-  "version": "0.6.1",
+  "version": "0.6.2",
+  "mcpName": "io.github.scrapeless-ai/scrapeless-mcp-server",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -30,7 +31,7 @@
   ],
   "author": "",
   "license": "ISC",
-  "description": "Scrapeless MCP Server gives AI agents a unified interface for web search, browser automation, web scraping, crawling, CAPTCHA solving and LLM response collection.",
+  "description": "Web search, browser automation, scraping, crawling and CAPTCHA solving for AI agents.",
   "dependencies": {
     "@chatmcp/sdk": "^1.0.5",
     "@modelcontextprotocol/sdk": "^1.8.0",
